@@ -9,8 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
-
-
     EditText editTextInput;
 
     TextView textEncrypt;
@@ -19,18 +17,12 @@ public class MainActivity2 extends AppCompatActivity {
     Button buttonEncrypt;
     Button buttonDecrypt;
     Button buttonSave;
-
-    KeyStoreHelper keyStoreHelper;
-    SharedPreferencesHelper preferencesHelper;
+    Button btnJump;
     private static final String PREF_KEY_2 = "PREF_KEY_2";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        preferencesHelper = UtilSp.getSharedPreferencesHelper(this);
-        keyStoreHelper = UtilSp.getKeyStoreHelper(this);
-
 
         initView();
         initEditTextInput();
@@ -39,35 +31,34 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private void initEditTextInput() {
-        String encryptedText = preferencesHelper.getInput(keyStoreHelper.encrypt(PREF_KEY_2 ));
-        String plainInput = keyStoreHelper.decrypt(encryptedText);
-        editTextInput.setText(plainInput);
+        editTextInput.setText(UtilSafeSP.fetch(PREF_KEY_2));
     }
 
     private void setupButton() {
         buttonEncrypt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String encryptedText = keyStoreHelper.encrypt(editTextInput.getText().toString());
-                textEncrypt.setText(encryptedText);
+//                String encryptedText = keyStoreHelper.encrypt(editTextInput.getText().toString());
+//                textEncrypt.setText(encryptedText);
             }
         });
 
         buttonDecrypt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String decryptedText = keyStoreHelper.decrypt(textEncrypt.getText().toString());
-                textDecrypt.setText(decryptedText);
+//                String decryptedText = keyStoreHelper.decrypt(textEncrypt.getText().toString());
+//                textDecrypt.setText(decryptedText);
             }
         });
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preferencesHelper.setInput(keyStoreHelper.encrypt(PREF_KEY_2 ),textEncrypt.getText().toString());
+                UtilSafeSP.save(PREF_KEY_2,editTextInput.getText().toString());
                 Toast.makeText(getApplicationContext(), "Successfully saved!", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 
@@ -78,5 +69,6 @@ public class MainActivity2 extends AppCompatActivity {
         buttonEncrypt = (Button) findViewById(R.id.button_encrypt);
         buttonDecrypt = (Button) findViewById(R.id.button_decrypt);
         buttonSave = (Button) findViewById(R.id.button_save);
+        btnJump = (Button) findViewById(R.id.btnJump);
     }
 }

@@ -21,16 +21,11 @@ public class MainActivity extends AppCompatActivity {
     Button buttonDecrypt;
     Button buttonSave;
     Button btnJump;
-    KeyStoreHelper keyStoreHelper;
-    SharedPreferencesHelper preferencesHelper;
     private static final String PREF_KEY_1 = "PREF_KEY_1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        preferencesHelper = UtilSp.getSharedPreferencesHelper(this);
-        keyStoreHelper = UtilSp.getKeyStoreHelper(this);
 
         initView();
         initEditTextInput();
@@ -39,32 +34,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEditTextInput() {
-        String encryptedText = preferencesHelper.getInput(keyStoreHelper.encrypt(PREF_KEY_1 ));
-        String plainInput = keyStoreHelper.decrypt(encryptedText);
-        editTextInput.setText(plainInput);
+        editTextInput.setText(UtilSafeSP.fetch(PREF_KEY_1));
     }
 
     private void setupButton() {
         buttonEncrypt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String encryptedText = keyStoreHelper.encrypt(editTextInput.getText().toString());
-                textEncrypt.setText(encryptedText);
+//                String encryptedText = keyStoreHelper.encrypt(editTextInput.getText().toString());
+//                textEncrypt.setText(encryptedText);
             }
         });
 
         buttonDecrypt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String decryptedText = keyStoreHelper.decrypt(textEncrypt.getText().toString());
-                textDecrypt.setText(decryptedText);
+//                String decryptedText = keyStoreHelper.decrypt(textEncrypt.getText().toString());
+//                textDecrypt.setText(decryptedText);
             }
         });
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preferencesHelper.setInput(keyStoreHelper.encrypt(PREF_KEY_1) ,textEncrypt.getText().toString());
+                UtilSafeSP.save(PREF_KEY_1,editTextInput.getText().toString());
                 Toast.makeText(getApplicationContext(), "Successfully saved!", Toast.LENGTH_SHORT).show();
             }
         });
