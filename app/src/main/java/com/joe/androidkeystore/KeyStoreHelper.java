@@ -33,6 +33,9 @@ public class KeyStoreHelper {
 
     private static final String TAG = "KEYSTORE";
 
+    /**
+     * 固定，不更改
+     */
     private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
     private static final String AES_MODE = "AES/GCM/NoPadding";
     private static final String RSA_MODE = "RSA/ECB/PKCS1Padding";

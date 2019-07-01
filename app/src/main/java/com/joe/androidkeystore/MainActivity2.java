@@ -1,6 +1,5 @@
 package com.joe.androidkeystore;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
 
     EditText editTextInput;
@@ -20,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
     Button buttonEncrypt;
     Button buttonDecrypt;
     Button buttonSave;
-    Button btnJump;
+
     KeyStoreHelper keyStoreHelper;
     SharedPreferencesHelper preferencesHelper;
-    private static final String PREF_KEY_1 = "PREF_KEY_1";
+    private static final String PREF_KEY_2 = "PREF_KEY_2";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEditTextInput() {
-        String encryptedText = preferencesHelper.getInput(PREF_KEY_1 );
+        String encryptedText = preferencesHelper.getInput(PREF_KEY_2 );
         String plainInput = keyStoreHelper.decrypt(encryptedText);
         editTextInput.setText(plainInput);
     }
@@ -65,15 +64,8 @@ public class MainActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preferencesHelper.setInput(PREF_KEY_1 ,textEncrypt.getText().toString());
+                preferencesHelper.setInput(PREF_KEY_2 ,textEncrypt.getText().toString());
                 Toast.makeText(getApplicationContext(), "Successfully saved!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btnJump.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,MainActivity2.class);
-                startActivity(intent);
             }
         });
     }
@@ -86,6 +78,5 @@ public class MainActivity extends AppCompatActivity {
         buttonEncrypt = (Button) findViewById(R.id.button_encrypt);
         buttonDecrypt = (Button) findViewById(R.id.button_decrypt);
         buttonSave = (Button) findViewById(R.id.button_save);
-        btnJump = (Button) findViewById(R.id.btnJump);
     }
 }

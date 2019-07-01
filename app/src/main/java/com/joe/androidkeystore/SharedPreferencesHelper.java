@@ -10,7 +10,6 @@ public class SharedPreferencesHelper {
 
     private static final String PREF_KEY_AES = "PREF_KEY_AES";
     private static final String PREF_KEY_IV = "PREF_KEY_IV";
-    private static final String PREF_KEY_INPUT = "PREF_KEY_INPUT";
 
     private SharedPreferences sharedPreferences;
 
@@ -60,12 +59,12 @@ public class SharedPreferencesHelper {
         return getString(PREF_KEY_AES);
     }
 
-    public void setInput(String value) {
-        putString(PREF_KEY_INPUT, value);
+    public void setInput(String key,String value) {
+        putString(key, value);
     }
 
-    public String getInput() {
-        return getString(PREF_KEY_INPUT);
+    public String getInput(String key) {
+        return getString(key);
     }
 
 

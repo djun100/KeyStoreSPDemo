@@ -63,7 +63,7 @@
     <TextView
         android:id="@+id/text_encrypt"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="@drawable/border"
         android:textSize="24sp" />
@@ -78,9 +78,13 @@
     <TextView
         android:id="@+id/text_decrypt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="@drawable/border"
         android:textSize="24sp" />
-
+    <Button
+        android:id="@+id/btnJump"
+        android:text="Jump to another activity2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
