@@ -28,8 +28,8 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        preferencesHelper = new SharedPreferencesHelper(getApplicationContext());
-        keyStoreHelper = new KeyStoreHelper(getApplicationContext(), preferencesHelper);
+        preferencesHelper = UtilSp.getSharedPreferencesHelper(this);
+        keyStoreHelper = UtilSp.getKeyStoreHelper(this);
 
 
         initView();
