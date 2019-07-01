@@ -161,7 +161,7 @@ public class KeyStoreHelper {
         SecureRandom secureRandom = new SecureRandom();
         secureRandom.nextBytes(aesKey);
 
-
+        //安全随机，根据系统状态、用户输入等事件作为种子
         // Generate 12 bytes iv then save to SharedPrefs
         byte[] generated = secureRandom.generateSeed(12);
         String iv = Base64.encodeToString(generated, Base64.DEFAULT);
