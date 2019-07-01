@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEditTextInput() {
-        String encryptedText = preferencesHelper.getInput(PREF_KEY_1 );
+        String encryptedText = preferencesHelper.getInput(keyStoreHelper.encrypt(PREF_KEY_1 ));
         String plainInput = keyStoreHelper.decrypt(encryptedText);
         editTextInput.setText(plainInput);
     }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preferencesHelper.setInput(PREF_KEY_1 ,textEncrypt.getText().toString());
+                preferencesHelper.setInput(keyStoreHelper.encrypt(PREF_KEY_1) ,textEncrypt.getText().toString());
                 Toast.makeText(getApplicationContext(), "Successfully saved!", Toast.LENGTH_SHORT).show();
             }
         });
