@@ -25,7 +25,10 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.security.auth.x500.X500Principal;
 
-/**
+/**知识参考：Using the Android Keystore system to store and retrieve sensitive information
+ * https://medium.com/@josiassena/using-the-android-keystore-system-to-store-sensitive-information-3a56175a454b
+ *https://gist.github.com/JosiasSena/3bf4ca59777f7dedcaf41a495d96d984
+ *
  * Created by Joe on 2017/5/24.
  */
 
@@ -40,6 +43,9 @@ public class KeyStoreHelper {
     private static final String AES_MODE = "AES/GCM/NoPadding";
     private static final String RSA_MODE = "RSA/ECB/PKCS1Padding";
 
+    /**
+     * alias是RSA密钥对的名称
+     */
     private static final String KEYSTORE_ALIAS = "KEYSTORE_DEMO";
 
 
@@ -64,7 +70,10 @@ public class KeyStoreHelper {
 
     }
 
-
+    /**为对应的alias在秘钥库中生成对应的RSA秘钥对
+     * @param context
+     * @throws Exception
+     */
     private void genKeyStoreKey(Context context) throws Exception {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             generateRSAKey_AboveApi23();
@@ -203,6 +212,9 @@ public class KeyStoreHelper {
     }
 
 
+    /**初始化向量，用于Cipher.init，不同的iv初始化的cipher加解密后可以得到不同的值
+     * @return
+     */
     private byte[] getIV() {
         String prefIV = prefsHelper.getIV();
         return Base64.decode(prefIV, Base64.DEFAULT);
